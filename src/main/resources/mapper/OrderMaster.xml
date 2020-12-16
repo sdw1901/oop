@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.oop.mapper.OrderMapper" >
+  	<select id="findAll" resultType="OrderMaster">
+  		SELECT
+			*
+		FROM
+			order_master
+  	</select>
+
+	<select id="findOne" resultType="OrderMaster">
+  		SELECT
+			*
+		FROM
+			order_master
+		WHERE
+			order_id = #{orderId}
+  	</select>
+
+	<select id="findDetailByOrderId" resultType="OrderDetail">
+  		SELECT
+			*
+		FROM
+			order_detail
+		WHERE
+			order_id = #{orderId}
+  	</select>
+
+	<update id="finish">
+		update
+			order_master
+		set order_status = 1 where order_status = 0
+	</update>
+
+</mapper>

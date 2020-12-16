@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.oop.mapper.ProductMapper">
+    <select id="findAll" resultType="ProductInfo">
+  		select
+  		  product_id,
+		  product_name,
+		  product_price,
+		  product_stock,
+		  product_description,
+		  product_icon,
+		  category_type,
+		  product_status,
+		  create_time,
+		  update_time
+		from
+		  product_info
+		<if test="categoryType != null and categoryType!=0 ">where category_type = #{categoryType}</if>
+		order by category_type asc
+  	</select>
+
+    <select id="findOne" resultType="ProductInfo">
+  		select
+  		  product_id,
+		  product_name,
+		  product_price,
+		  product_stock,
+		  product_description,
+		  product_icon,
+		  category_type,
+		  create_time,
+		  update_time
+		from
+		  product_info
+  		where
+  		  product_id = #{productId}
+  	</select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="productId">
+		INSERT INTO product_info
+		(
+		  product_id,
+		  product_name,
+		  product_price,
+		  product_stock,
+		  product_description,
+		  product_icon,
+		  category_type)
+		VALUES
+		(
+		  #{productId},
+		  #{productName},
+		  #{productPrice},
+		  #{productStock},
+		  #{productDescription},
+		  #{productIcon},
+		  #{categoryType}
+		)
+	</insert>
+
+	<update id="update">
+		UPDATE product_info
+		<set>
+			<if test="productName != null">product_name=#{productName},</if>
+			<if test="productPrice != null">product_price=#{productPrice},</if>
+			<if test="productStock != null">product_stock=#{productStock},</if>
+			<if test="productDescription != null">product_description=#{productDescription},</if>
+			<if test="productIcon != null">product_icon=#{productIcon},</if>
+			<if test="categoryType != null">category_type=#{categoryType}</if>
+		</set>
+		where product_id=#{productId}
+	</update>
+
+	<update id="offSale">
+		update product_info set product_status =  1 where product_status = 0 and product_id = #{productId}
+	</update>
+
+	<update id="onSale">
+		update product_info set product_status =  0 where product_status = 1 and product_id = #{productId}
+	</update>
+</mapper>
