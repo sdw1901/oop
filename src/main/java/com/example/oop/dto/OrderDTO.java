@@ -39,6 +39,8 @@ public class OrderDTO {
     /** 支付状态, 默认为0未支付. */
     private Integer payStatus;
 
+    private String pName;
+
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss") //出参
     private LocalDateTime createTime;
 

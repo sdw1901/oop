@@ -144,9 +144,16 @@ public class OrderServiceImpl implements OrderService {
         PageHelper.startPage(page, size);
         List<OrderMaster> orderMasterList = orderMapper.findByOpenId(openid);
         List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterList);
+        String pName = "";
         for (OrderDTO orderDTO : orderDTOList) {
             List<OrderDetail> orderDetailList = orderMapper.findDetailByOrderId(orderDTO.getOrderId());
+            for (int i = 0;i<orderDetailList.size();i++) {
+                if (i < 1) {
+                    pName += "+" + orderDetailList.get(i).getProductName();
+                }
+            }
             orderDTO.setOrderDetailList(orderDetailList);
+
         }
         return orderDTOList;
     }

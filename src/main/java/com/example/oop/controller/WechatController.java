@@ -27,7 +27,7 @@ public class WechatController {
     @Autowired
     private WxMpService wxMpService;
 
-    private String wechatMpAuthorizeUrl = "http://sid.natapp1.cc/";
+    private String wechatMpAuthorizeUrl = "http://oop.test.lambda.fans/";
 
 
     @GetMapping("/authorize")

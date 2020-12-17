@@ -36,7 +36,7 @@
                             <td style="text-align:center">${orderDTO.buyerAddress}</td>
                             <td style="text-align:center">${orderDTO.orderAmount}</td>
                             <td style="text-align:center">${orderDTO.orderStatusEnum.message}</td>
-                            <td style="text-align:center">--</td>
+                            <td style="text-align:center">${orderDTO.payStatusEnum.message}</td>
                             <td style="text-align:center">${orderDTO.createTime}</td>
                             <td style="text-align:center"><a href="/seller/order/detail?orderId=${orderDTO.orderId}">详情</a></td>
                             <td style="text-align:center">
@@ -106,7 +106,7 @@
 <script>
     var websocket = null;
     if('WebSocket' in window) {
-        websocket = new WebSocket('ws://127.0.0.1:12306/webSocket');
+        websocket = new WebSocket('ws://106.75.214.246:12306//webSocket');
     }else {
         alert('该浏览器不支持websocket!');
     }
