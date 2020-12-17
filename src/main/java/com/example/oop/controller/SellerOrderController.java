@@ -54,13 +54,28 @@ public class SellerOrderController {
     public ModelAndView cancel(@RequestParam("orderId") String orderId,
                                Map<String, Object> map) {
         try {
-            orderService.cancel(orderId);
+            orderService.cancel(orderId, null);
         } catch (SellException e) {
             log.error("【卖家端取消订单】发生异常{}", e);
             map.put("msg", e.getMessage());
             map.put("url", "/seller/order/list");
             return new ModelAndView("common/error", map);
         }
+
+        map.put("msg", ResultEnum.ORDER_CANCEL_SUCCESS.getMessage());
+        map.put("url", "/seller/order/list");
+        return new ModelAndView("common/success");
+    }
+
+    /**
+     * 接单
+     * @param orderId
+     * @return
+     */
+    @GetMapping("/receive")
+    public ModelAndView receive(@RequestParam("orderId") String orderId,
+                               Map<String, Object> map) {
+       orderService.receive(orderId);
 
         map.put("msg", ResultEnum.ORDER_CANCEL_SUCCESS.getMessage());
         map.put("url", "/seller/order/list");
@@ -95,7 +110,7 @@ public class SellerOrderController {
      * @param map
      * @return
      */
-    @PostMapping("/finish")
+    @GetMapping("/finish")
     public ModelAndView finished(@RequestParam("orderId") String orderId,
                                  Map<String, Object> map) {
         try {

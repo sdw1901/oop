@@ -16,4 +16,6 @@ public interface CategoryMapper {
     void save(CategoryForm form);
 
     void update(CategoryForm form);
+
+    List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList);
 }

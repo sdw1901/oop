@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.oop.mapper.OrderMapper" >
+	<update id="finish">
+		update
+			order_master
+		set order_status = 2
+		where order_id = #{orderId} and order_status = 1
+	</update>
+
+	<insert id="saveDetail">
+		INSERT INTO
+			order_detail
+			(detail_id ,
+			order_id ,
+			product_id ,
+			product_name ,
+			product_price ,
+			product_quantity ,
+			product_icon )
+		VALUES
+			(#{detailId},
+			#{orderId},
+			#{productId},
+			#{productName},
+			#{productPrice},
+			#{productQuantity},
+			#{productIcon} )
+	</insert>
+
+	<insert id="saveMaster">
+		INSERT INTO
+			order_master
+			( order_id,
+			 buyer_name,
+			 buyer_phone,
+			 buyer_address,
+			 buyer_openid,
+			 order_amount,
+			 order_status,
+			 pay_status)
+		VALUES
+			( #{orderId},
+			 #{buyerName},
+			 #{buyerPhone},
+			 #{buyerAddress},
+			 #{buyerOpenid},
+			 #{orderAmount},
+			 #{orderStatus},
+			 #{payStatus} )
+	</insert>
+
+	<update id="cancel">
+		update
+			order_master
+		set
+			order_status = 3
+		where order_id = #{orderId}
+	</update>
+
+	<update id="receive">
+		update
+			order_master
+		set
+			order_status = 1
+		where order_id = #{orderId} and order_status = 0
+	</update>
+
+	<select id="findAll" resultType="OrderMaster">
+  		SELECT
+			*
+		FROM
+			order_master
+		order by create_time desc
+  	</select>
+
+	<select id="findByOpenId" resultType="OrderMaster">
+		select
+			*
+		from
+			order_master
+		where buyer_openid = #{openId}
+		order by create_time desc
+	</select>
+
+	<select id="findOne" resultType="OrderMaster">
+  		SELECT
+			*
+		FROM
+			order_master
+		WHERE
+			order_id = #{orderId}
+  	</select>
+
+	<select id="findDetailByOrderId" resultType="OrderDetail">
+  		SELECT
+			*
+		FROM
+			order_detail
+		WHERE
+			order_id = #{orderId}
+  	</select>
+</mapper>

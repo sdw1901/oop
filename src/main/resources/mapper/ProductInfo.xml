@@ -19,6 +19,21 @@
 		order by category_type asc
   	</select>
 
+	<select id="findUpAll" resultType="ProductInfo">
+		select
+		product_id,
+		product_name,
+		product_price,
+		product_stock,
+		product_description,
+		product_icon,
+		category_type
+		from
+			product_info
+		WHERE
+			product_status = 0
+	</select>
+
     <select id="findOne" resultType="ProductInfo">
   		select
   		  product_id,
@@ -34,6 +49,24 @@
 		  product_info
   		where
   		  product_id = #{productId}
+  	</select>
+
+	<select id="findOneForUpdate" resultType="ProductInfo">
+  		select
+  		  product_id,
+		  product_name,
+		  product_price,
+		  product_stock,
+		  product_description,
+		  product_icon,
+		  category_type,
+		  create_time,
+		  update_time
+		from
+		  product_info
+  		where
+  		  product_id = #{productId}
+  		FOR UPDATE
   	</select>
 
     <insert id="save" useGeneratedKeys="true" keyProperty="productId">
@@ -77,5 +110,13 @@
 
 	<update id="onSale">
 		update product_info set product_status =  0 where product_status = 1 and product_id = #{productId}
+	</update>
+
+	<update id="decreaseStock">
+		update product_info set product_stock = product_stock - #{productQuantity} where product_id = #{productId} and product_stock - #{productQuantity} >= 0
+	</update>
+
+	<update id="increaseStock">
+		update product_info set product_stock = product_stock + #{productQuantity} where product_id = #{productId}
 	</update>
 </mapper>

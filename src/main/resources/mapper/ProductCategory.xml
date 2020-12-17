@@ -12,6 +12,19 @@
 			product_category
   	</select>
 
+	<select id="findByCategoryTypeIn" resultType="productCategory">
+		SELECT
+			category_id,
+			category_name,
+			category_type
+		FROM
+			product_category
+		where category_type in
+		<foreach item="categoryTypeList" index="index" collection="list" open="("  close=")" separator=",">
+			#{categoryTypeList}
+		</foreach>
+	</select>
+
 	<select id="findByCategoryId" resultType="ProductCategory">
 		SELECT
 			category_id,

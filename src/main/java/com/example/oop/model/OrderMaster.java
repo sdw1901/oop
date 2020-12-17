@@ -4,6 +4,7 @@ import com.example.oop.enums.OrderStatusEnum;
 import com.example.oop.enums.PayStatusEnum;
 import com.example.oop.enums.ProductStatusEnum;
 import com.example.oop.utils.EnumUtil;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -39,9 +40,11 @@ public class OrderMaster {
     private Integer payStatus;
 
     /** 创建时间. */
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss") //出参
     private LocalDateTime createTime;
 
     /** 更新时间. */
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss") //出参
     private LocalDateTime updateTime;
 
     public OrderStatusEnum getOrderStatusEnum() {

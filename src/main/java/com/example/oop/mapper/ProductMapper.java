@@ -20,4 +20,12 @@ public interface ProductMapper {
     void offSale(String productId);
 
     void onSale(String productId);
+
+    List<ProductInfo> findUpAll();
+
+    void decreaseStock(String productId, Integer productQuantity);
+
+    ProductInfo findOneForUpdate(String productId);
+
+    void increaseStock(String productId, Integer productQuantity);
 }

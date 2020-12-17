@@ -35,4 +35,10 @@ public class CategoryServiceImpl implements CategoryService {
     public void update(CategoryForm form) {
         categoryMapper.update(form);
     }
+
+    @Override
+    public List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList) {
+
+        return categoryMapper.findByCategoryTypeIn(categoryTypeList);
+    }
 }

@@ -17,4 +17,14 @@ public interface OrderMapper {
     OrderMaster findOne(String orderId);
 
     void finish(String orderId);
+
+    void saveDetail(OrderDetail orderDetail);
+
+    void saveMaster(OrderMaster orderMaster);
+
+    List<OrderMaster> findByOpenId(String openid);
+
+    void cancel(String orderId);
+
+    void receive(String orderId);
 }

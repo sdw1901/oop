@@ -4,6 +4,7 @@ import com.example.oop.form.ProductForm;
 import com.example.oop.model.ProductInfo;
 import com.github.pagehelper.PageInfo;
 
+import java.util.List;
 
 
 /**
@@ -11,13 +12,6 @@ import com.github.pagehelper.PageInfo;
  */
 public interface ProductService {
 
-//
-//    /**
-//     * 查询所有在架商品列表
-//     * @return
-//     */
-//    List<ProductInfo> findUpAllWithPage();
-//
 
     /**
      * 分页查找所有商品
@@ -51,16 +45,10 @@ public interface ProductService {
     void onSale(String productId);
 
     void offSale(String productId);
-//
-//    //加库存
-//    void increaseStock(List<CartDTO> cartDTOList);
-//
-//    //减库存
-//    void decreaseStock(List<CartDTO> cartDTOList);
-//
-//    //上架
-//    ProductInfo onSale(String productId);
-//
-//    //下架
-//    ProductInfo offSale(String productId);
+
+    List<ProductInfo> findUpAll();
+
+    void decreaseStock(String productId, Integer productQuantity);
+
+    void increaseStock(String productId, Integer productQuantity);
 }
